@@ -32,12 +32,7 @@ public class CityService implements CityLocal{
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public City getCityById(int id) {
-        String jpa = "Select city FROM City city where city.id = :id";
-        try {
-            return (City) entityManager.createQuery(jpa).setParameter("id", id).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        return entityManager.find(City.class, id);
     }
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)

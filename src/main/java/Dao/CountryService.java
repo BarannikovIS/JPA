@@ -33,13 +33,7 @@ public class CountryService implements CountryLocal {
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Country getCountryById(int id) {
-        String jpa = "Select c FROM Country c where c.id = :id";
-        try {
-            return (Country) entityManager.createQuery(jpa).setParameter("id", id).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-
+        return entityManager.find(Country.class,id);
     }
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
